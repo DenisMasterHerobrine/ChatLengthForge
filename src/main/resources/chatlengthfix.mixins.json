@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.denismasterherobrine.chatlengthfix.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ChatScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "StringHelperMixin"
+  ],
+  "refmap": "NoCommandChatLimit-refmap.json"
+}
