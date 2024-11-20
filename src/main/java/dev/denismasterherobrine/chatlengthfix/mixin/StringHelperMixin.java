@@ -1,18 +1,17 @@
 package dev.denismasterherobrine.chatlengthfix.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.util.StringUtil;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(StringUtil.class)
 public class StringHelperMixin {
-    @WrapOperation(method = "Lnet/minecraft/util/StringUtil;truncateStringIfNecessary(Ljava/lang/String;IZ)Ljava/lang/String;",  at={@org.spongepowered.asm.mixin.injection.At(value="HEAD", target="Lnet/minecraft/util/StringUtil;truncateStringIfNecessary(Ljava/lang/String;IZ)Ljava/lang/String;")})
-    private static String truncateStringIfNecessary(String text, int maxLength, boolean addEllipsis, Operation<String> original) {
+    @Inject(method = "truncateStringIfNecessary(Ljava/lang/String;IZ)Ljava/lang/String;", at = @At(value = "HEAD"), cancellable = true)
+    private static void truncateStringIfNecessary(String text, int maxLength, boolean addEllipsis, CallbackInfoReturnable<String> cir) {
         if (text.startsWith("/")) {
-            return text;
+            cir.setReturnValue(text);
         }
-
-        return original.call(text, maxLength, addEllipsis);
     }
 }

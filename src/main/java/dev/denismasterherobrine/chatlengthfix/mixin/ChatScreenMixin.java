@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ChatScreenMixin {
     @Shadow protected EditBox input;
 
-    @Inject(method = "Lnet/minecraft/client/gui/screens/ChatScreen;onEdited(Ljava/lang/String;)V", at = @org.spongepowered.asm.mixin.injection.At(value = "TAIL", target = "Lnet/minecraft/client/gui/screens/ChatScreen;commandSuggestions:Lnet/minecraft/client/gui/components/CommandSuggestions;"))
+    @Inject(method = "onEdited(Ljava/lang/String;)V", at = @org.spongepowered.asm.mixin.injection.At(value = "HEAD"))
     private void modifyChatLengthIfCommand(String chatText, CallbackInfo ci) {
         if (this.input.getValue().startsWith("/")) {
             this.input.setMaxLength(Integer.MAX_VALUE);

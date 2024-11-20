@@ -12,5 +12,5 @@
   "mixins": [
     "StringHelperMixin"
   ],
-  "refmap": "NoCommandChatLimit-refmap.json"
+  "refmap": "chatlengthfix.refmap.json"
 }
