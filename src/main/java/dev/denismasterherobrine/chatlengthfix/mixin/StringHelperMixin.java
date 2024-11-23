@@ -10,8 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class StringHelperMixin {
     @Inject(method = "truncateStringIfNecessary(Ljava/lang/String;IZ)Ljava/lang/String;", at = @At(value = "HEAD"), cancellable = true)
     private static void truncateStringIfNecessary(String text, int maxLength, boolean addEllipsis, CallbackInfoReturnable<String> cir) {
-        if (text.startsWith("/")) {
-            cir.setReturnValue(text);
-        }
+        cir.setReturnValue(text);
     }
 }

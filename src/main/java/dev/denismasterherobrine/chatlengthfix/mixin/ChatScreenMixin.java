@@ -13,10 +13,11 @@ public class ChatScreenMixin {
 
     @Inject(method = "onEdited(Ljava/lang/String;)V", at = @org.spongepowered.asm.mixin.injection.At(value = "HEAD"))
     private void modifyChatLengthIfCommand(String chatText, CallbackInfo ci) {
-        if (this.input.getValue().startsWith("/")) {
-            this.input.setMaxLength(Integer.MAX_VALUE);
-        } else {
-            this.input.setMaxLength(256);
-        }
+        this.input.setMaxLength(Integer.MAX_VALUE);
+    }
+
+    @Inject(method = "init", at = @org.spongepowered.asm.mixin.injection.At(value = "TAIL"))
+    private void modifyChatLengthIfCommand_init(CallbackInfo ci) {
+        this.input.setMaxLength(Integer.MAX_VALUE);
     }
 }
